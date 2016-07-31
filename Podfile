@@ -8,6 +8,7 @@ target 'Twitter' do
   # Pods for Twitter
     pod 'AFNetworking'
     pod 'BDBOAuth1Manager' 
+    pod 'SwiftyJSON'
 
   target 'TwitterTests' do
     inherit! :search_paths
