@@ -62,25 +62,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J0V-wr-9Sl">
-                                                    <rect key="frame" x="288" y="6" width="20" height="16"/>
+                                                    <rect key="frame" x="288" y="5" width="20" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@CricketWallah" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIT-89-epP">
-                                                    <rect key="frame" x="163" y="6" width="96" height="16"/>
+                                                    <rect key="frame" x="163" y="5" width="96" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CricketWallah" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR4-IO-Gja">
-                                                    <rect key="frame" x="67" y="5" width="88" height="17"/>
+                                                    <rect key="frame" x="67" y="5" width="88" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="There's a power, timing and also a lilt to K L Rahul's batting that makes him compelling watching. Fine young player!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dX-7o-Ol2">
-                                                    <rect key="frame" x="67" y="26" width="245" height="47"/>
+                                                    <rect key="frame" x="67" y="25" width="245" height="47"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -130,7 +130,7 @@
                                                 <constraint firstItem="1b6-R0-RIY" firstAttribute="centerY" secondItem="f0q-SI-hNf" secondAttribute="centerY" id="Y7Y-hH-TLK"/>
                                                 <constraint firstItem="KIT-89-epP" firstAttribute="centerY" secondItem="cR4-IO-Gja" secondAttribute="centerY" id="ZpN-23-Mfe"/>
                                                 <constraint firstItem="cR4-IO-Gja" firstAttribute="top" secondItem="Pyh-hc-gxx" secondAttribute="top" id="bD6-8J-bzi"/>
-                                                <constraint firstItem="f0q-SI-hNf" firstAttribute="top" secondItem="7dX-7o-Ol2" secondAttribute="bottom" constant="4" id="biq-Pd-FYX"/>
+                                                <constraint firstItem="f0q-SI-hNf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7dX-7o-Ol2" secondAttribute="bottom" constant="4" id="biq-Pd-FYX"/>
                                                 <constraint firstItem="cR4-IO-Gja" firstAttribute="leading" secondItem="Pyh-hc-gxx" secondAttribute="trailing" constant="4" id="d1O-Vf-VoT"/>
                                                 <constraint firstItem="HM2-WQ-6Oc" firstAttribute="centerY" secondItem="1b6-R0-RIY" secondAttribute="centerY" id="hAn-Md-hrD"/>
                                                 <constraint firstItem="7dX-7o-Ol2" firstAttribute="top" secondItem="cR4-IO-Gja" secondAttribute="bottom" constant="4" id="jeF-rS-FdZ"/>
