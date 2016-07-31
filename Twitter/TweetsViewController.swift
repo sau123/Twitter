@@ -34,7 +34,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }) { (error: NSError) -> () in
             print("error : \(error.localizedDescription)")
         }
-        
      
     }
     
@@ -50,16 +49,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
-        
-        let tweetIndex = tweets![indexPath.row]
-        
-        cell.tweetTextLabel.text = tweetIndex.text as? String
-        cell.favoritesCountLabel.text = "\(tweetIndex.favoritesCount)"
-        cell.reTweetCountLabel.text = "\(tweetIndex.retweetCount)"
-        cell.fullNameLabel.text = tweetIndex.name as? String
-        cell.screenNameLabel.text = tweetIndex.screenName as? String
-        cell.profileImageView.setImageWithURL(tweetIndex.imageUrl!)
-        
+        cell.tweet = tweets![indexPath.row]
         return cell
     }
     

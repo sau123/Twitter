@@ -18,9 +18,32 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    var tweet : Tweet! {
+        didSet{
+            fullNameLabel.text = tweet.name as? String
+            tweetTextLabel.text = tweet.text as? String
+            favoritesCountLabel.text = "\(tweet.favoritesCount)"
+            reTweetCountLabel.text = "\(tweet.retweetCount)"
+            fullNameLabel.text = tweet.name as? String
+            screenNameLabel.text = tweet.screenName as? String
+            profileImageView.setImageWithURL(tweet.imageUrl!)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        profileImageView.layer.cornerRadius = 4
+        profileImageView.clipsToBounds = true
+        
+        tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
+
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
