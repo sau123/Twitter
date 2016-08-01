@@ -17,6 +17,7 @@ class Tweet: NSObject {
     var screenName: NSString? //@ShaneWarne
     var name: NSString? // Shane Warne
     var imageUrl: NSURL?
+    var tweetID: NSString?
     
     
     init(dictionary: NSDictionary){

@@ -12,7 +12,7 @@ import BDBOAuth1Manager
 class TwitterClient: BDBOAuth1SessionManager {
     
     
-    static let sharedInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com")!, consumerKey: "TpM5d2eEWOCb2JmQaZihWYd0G", consumerSecret: "LKTEulkZTAAjC9omB7asw5OFrrV9dJq6F63YFhOUwo7eIUHBY6")
+    static let sharedInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com")!, consumerKey: "tSsITTzUmYMINwQfL0H4jiOHI", consumerSecret: "kMA1Vp9cn28boG76T0cKOoc9FvGxgNbFN1PuVfBoMKhxJXEzxH")
         
     var loginSuccess: (() -> ())?
     var loginFailure: ((NSError) -> ())?
@@ -60,7 +60,21 @@ class TwitterClient: BDBOAuth1SessionManager {
             print("Error : \(error.localizedDescription)")
             self.loginFailure?(error)
         }
+    }
+    
+    
+    func postTweet(composeTweet: String){
+//        var params = Dictionary<String, String>()
         
+        var params : [String : String] = [:]
+        params["status"] = composeTweet
+        POST("1.1/statuses/update.json", parameters: params, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print("success posting tweet")
+            print("response from success of tweet : \(response)")
+        },failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("task : \(task)")
+                print("Error posting tweet : \(error.localizedDescription)")
+        })
     }
     
     func homeTimeline(success:([Tweet]) -> (), failure: (NSError) -> ()) {

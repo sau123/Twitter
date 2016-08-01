@@ -105,7 +105,7 @@
                                                         <constraint firstAttribute="width" constant="20" id="gWG-cf-2qm"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favourites" translatesAutoresizingMaskIntoConstraints="NO" id="HM2-WQ-6Oc">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorites" translatesAutoresizingMaskIntoConstraints="NO" id="HM2-WQ-6Oc">
                                                     <rect key="frame" x="136" y="78" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="c28-sy-zRR"/>
@@ -272,7 +272,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="favourites" width="700" height="700"/>
+        <image name="favorites" width="700" height="700"/>
         <image name="retweet" width="700" height="700"/>
     </resources>
 </document>

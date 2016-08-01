@@ -30,6 +30,19 @@ class ComposeViewController: UIViewController {
     
     @IBAction func composeButtonTapped(sender: AnyObject) {
         
+        if composeTextView.text.isEmpty {
+            
+            let OKAction = UIAlertAction(title: "Ok", style: .Default) { (action) in
+                // no action for now!
+//                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            let alertController = UIAlertController(title: "Compose Error", message: "Compose Message can not be empty!", preferredStyle: .Alert)
+            alertController.addAction(OKAction)
+            self.presentViewController(alertController, animated: true, completion:  nil)
+        }else{
+            TwitterClient.sharedInstance.postTweet(composeTextView.text!)
+        }
+        
     }
     
     
