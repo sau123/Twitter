@@ -7,44 +7,88 @@
 //
 
 import UIKit
+import SVPullToRefresh
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var tweets : [Tweet]?
     @IBOutlet weak var tableView: UITableView!
     
+    /*
+    func initializeRefreshControl() {
+        // Initialize a UIRefreshControl
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+    }
+    */
+    
+    
+    func getTimeLineTweets(){
+        TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
+            print("refreshing")
+            self.tweets = tweets
+            self.tableView.reloadData()
+        }) { (error: NSError) -> () in
+            print("error : \(error.localizedDescription)")
+        }
+    }
+    func refreshControlInit(){
+        tableView.addPullToRefreshWithActionHandler {
+            self.getTimeLineTweets()
+        }
+    }
+    
+  /*
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        
+        print("in refrest control action!")
+        // ... Create the NSURLRequest (myRequest) ...
+//        var myRequest  = TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
+//            self.tweets = tweets
+//            self.tableView.reloadData()
+//            
+//        }) { (error: NSError) -> () in
+//            print("error : \(error.localizedDescription)")
+//        }
+        
+        
+        
+        // Configure session so that completion handler is executed on main UI thread
+        let session = NSURLSession(
+            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+            delegate:nil,
+            delegateQueue:NSOperationQueue.mainQueue()
+        )
+        
+        let task : NSURLSessionDataTask =
+                session.dataTaskWithRequest(myRequest, completionHandler: { (data, response, error) in
+                                                    self.myTableView.reloadData()
+                                                    refreshControl.endRefreshing()	
+        });
+        task.resume()
+    }
+*/
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         
-        TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-
-            //reload data
-            for tweet in tweets{
-                print("tweet text : ",tweet.text)
-                print("tweet fav count : ", tweet.favoritesCount)
-                print("tweet  timestamp : ", tweet.timestamp)
-                print("tweet recount : ",tweet.retweetCount)
-                print()
-            }
-            
-        }) { (error: NSError) -> () in
-            print("error : \(error.localizedDescription)")
-        }
-     
+        refreshControlInit()
+        self.getTimeLineTweets()
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("count is saumeel: ",self.tweets?.count)
-//        return self.tweets?.count ?? 0
-        if self.tweets != nil {
-            return self.tweets!.count
-        }else{
-            return 0
-        }
+        return self.tweets?.count ?? 0
+//        if self.tweets != nil {
+//            return self.tweets!.count
+//        }else{
+//            return 0
+//        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
