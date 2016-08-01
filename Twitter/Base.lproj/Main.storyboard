@@ -124,7 +124,7 @@
                                                     </constraints>
                                                     <state key="normal" title="Button" image="retweet"/>
                                                     <connections>
-                                                        <action selector="retweetButtonClicked:" destination="or1-gQ-nmh" eventType="touchUpInside" id="lpQ-kZ-CI0"/>
+                                                        <action selector="reTweetButtonTapped:" destination="or1-gQ-nmh" eventType="touchUpInside" id="Ysm-tj-3UQ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -144,6 +144,7 @@
                                                 <constraint firstItem="7dX-7o-Ol2" firstAttribute="top" secondItem="cR4-IO-Gja" secondAttribute="bottom" constant="4" id="jeF-rS-FdZ"/>
                                                 <constraint firstItem="Pyh-hc-gxx" firstAttribute="leading" secondItem="1Zd-4i-qCK" secondAttribute="leading" constant="8" id="mW9-Hs-fcR"/>
                                                 <constraint firstItem="Zsv-RR-6RZ" firstAttribute="leading" secondItem="q6Z-MJ-taq" secondAttribute="trailing" constant="5" id="o9n-Y9-D0G"/>
+                                                <constraint firstAttribute="bottom" secondItem="tt7-U3-O1C" secondAttribute="bottom" constant="9" id="sQl-J6-vvw"/>
                                                 <constraint firstItem="KIT-89-epP" firstAttribute="leading" secondItem="cR4-IO-Gja" secondAttribute="trailing" constant="8" id="u2l-1L-aQX"/>
                                                 <constraint firstItem="q6Z-MJ-taq" firstAttribute="leading" secondItem="1b6-R0-RIY" secondAttribute="trailing" constant="22" id="uKC-MR-4bR"/>
                                                 <constraint firstAttribute="trailing" secondItem="7dX-7o-Ol2" secondAttribute="trailing" constant="8" id="wjL-ld-8Km"/>
@@ -157,7 +158,6 @@
                                             <outlet property="fullNameLabel" destination="cR4-IO-Gja" id="bJu-0e-J8w"/>
                                             <outlet property="profileImageView" destination="Pyh-hc-gxx" id="akZ-sZ-gpE"/>
                                             <outlet property="reTweetCountLabel" destination="1b6-R0-RIY" id="Qhq-tT-7BV"/>
-                                            <outlet property="retweetButton" destination="tt7-U3-O1C" id="ywN-2S-Bya"/>
                                             <outlet property="screenNameLabel" destination="KIT-89-epP" id="wrj-gT-YCy"/>
                                             <outlet property="tweetTextLabel" destination="7dX-7o-Ol2" id="gOa-0B-Okw"/>
                                             <segue destination="MJL-Xs-t1I" kind="modal" id="z8M-Ie-f7n"/>
@@ -334,7 +334,13 @@
                             <constraint firstItem="TQB-6w-Ee5" firstAttribute="leading" secondItem="s4C-bZ-upL" secondAttribute="leading" id="xLY-Ve-6an"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Tweet" id="aBO-0R-twW"/>
+                    <navigationItem key="navigationItem" title="Tweet" id="aBO-0R-twW">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="hZ0-NU-ZmP">
+                            <connections>
+                                <action selector="backButtonTapped:" destination="m3b-gc-4ZC" id="4DW-I0-EpE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="4Jt-s6-A8g" id="kQi-Ya-2Mg"/>
                         <outlet property="detailedImageLabel" destination="s4C-bZ-upL" id="881-8L-pTF"/>

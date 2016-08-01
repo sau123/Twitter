@@ -19,6 +19,8 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoritesButton: UIButton!
+    var tweetID : String!
+    weak var delegate: ButtonsDelegate?
     
     var tweet : Tweet! {
         didSet{
@@ -29,6 +31,8 @@ class TweetCell: UITableViewCell {
             fullNameLabel.text = tweet.name as? String
             screenNameLabel.text = tweet.screenName as? String
             profileImageView.setImageWithURL(tweet.imageUrl!)
+            
+            tweetID = tweet.tweetID as! String
         }
     }
     
@@ -51,9 +55,9 @@ class TweetCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    @IBAction func retweetButtonClicked(sender: AnyObject) {
-        
+    @IBAction func reTweetButtonTapped(sender: AnyObject) {
+        print("tapped retweetbutton")
+        delegate?.tweetIDPassed!(self, tweetIDPassed: tweetID)
     }
-    
 
 }

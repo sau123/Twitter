@@ -9,10 +9,24 @@
 import UIKit
 import SVPullToRefresh
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+/*
+Delegates
+ */
+
+@objc protocol ButtonsDelegate: class{
+    optional func tweetIDPassed(tweetCell: TweetCell, tweetIDPassed tweetID: String)
+}
+
+
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonsDelegate {
     
     var tweets : [Tweet]?
     @IBOutlet weak var tableView: UITableView!
+    
+    func tweetIDPassed(tweetCell: TweetCell, tweetIDPassed tweetID: String) {
+            print("send this tweet to another view controller :\(tweetID)")
+    }
     
     func getTimeLineTweets(){
         TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
@@ -52,20 +66,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
-        
-        cell.retweetButton.addTarget(self, action: #selector(TweetCell.retweetButtonClicked(_:)), forControlEvents: .TouchUpInside)
-        
         cell.tweet = tweets![indexPath.row]
         
-        
+        cell.delegate = self
         return cell
     }
     
-    
-    @IBAction func favoritesTapped(sender: AnyObject) {
-        print("favorite button tapped!")
-        print(sender)
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,7 +82,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
+    /*
      // MARK: - Navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "composeSegue"{
@@ -84,11 +90,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let filtersViewController = navigationController.topViewController as! ComposeViewController
             
         }
-        
+ 
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
-    
+    */
     
     
 }
