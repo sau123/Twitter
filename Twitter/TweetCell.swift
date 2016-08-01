@@ -17,8 +17,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var retweetButton: UIButton!
-    @IBOutlet weak var favoritesButton: UIButton!
+    
     var tweetID : String!
     weak var delegate: ButtonsDelegate?
     

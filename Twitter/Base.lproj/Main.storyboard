@@ -39,7 +39,7 @@
             </objects>
             <point key="canvasLocation" x="162" y="396"/>
         </scene>
-        <!--Twitter-->
+        <!--Tweets View Controller-->
         <scene sceneID="kIS-H4-o2T">
             <objects>
                 <viewController id="8hg-gr-Mde" customClass="TweetsViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
@@ -123,8 +123,16 @@
                                                         <constraint firstAttribute="width" constant="20" id="Xsm-5O-Cfs"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="retweet"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xom-sr-mbJ">
+                                                    <rect key="frame" x="210" y="78" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="LGg-ab-RrZ"/>
+                                                        <constraint firstAttribute="width" constant="20" id="M5z-Ge-Bgc"/>
+                                                    </constraints>
+                                                    <state key="normal" image="reply"/>
                                                     <connections>
-                                                        <action selector="reTweetButtonTapped:" destination="or1-gQ-nmh" eventType="touchUpInside" id="Ysm-tj-3UQ"/>
+                                                        <action selector="reTweetButtonTapped:" destination="or1-gQ-nmh" eventType="touchUpInside" id="pKQ-zF-SWH"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -136,6 +144,7 @@
                                                 <constraint firstItem="J0V-wr-9Sl" firstAttribute="centerY" secondItem="cR4-IO-Gja" secondAttribute="centerY" id="BA2-5e-fJo"/>
                                                 <constraint firstAttribute="trailing" secondItem="J0V-wr-9Sl" secondAttribute="trailing" constant="12" id="F6C-rZ-GFs"/>
                                                 <constraint firstItem="1b6-R0-RIY" firstAttribute="leading" secondItem="tt7-U3-O1C" secondAttribute="trailing" constant="4" id="Fi2-g6-dsX"/>
+                                                <constraint firstItem="xom-sr-mbJ" firstAttribute="leading" secondItem="Zsv-RR-6RZ" secondAttribute="trailing" constant="22" id="GtB-i0-XSJ"/>
                                                 <constraint firstItem="7dX-7o-Ol2" firstAttribute="leading" secondItem="Pyh-hc-gxx" secondAttribute="trailing" constant="4" id="PKg-JU-Nbb"/>
                                                 <constraint firstItem="KIT-89-epP" firstAttribute="centerY" secondItem="cR4-IO-Gja" secondAttribute="centerY" id="ZpN-23-Mfe"/>
                                                 <constraint firstItem="cR4-IO-Gja" firstAttribute="top" secondItem="Pyh-hc-gxx" secondAttribute="top" id="bD6-8J-bzi"/>
@@ -143,6 +152,7 @@
                                                 <constraint firstItem="1b6-R0-RIY" firstAttribute="centerY" secondItem="tt7-U3-O1C" secondAttribute="centerY" id="gir-7S-vdl"/>
                                                 <constraint firstItem="7dX-7o-Ol2" firstAttribute="top" secondItem="cR4-IO-Gja" secondAttribute="bottom" constant="4" id="jeF-rS-FdZ"/>
                                                 <constraint firstItem="Pyh-hc-gxx" firstAttribute="leading" secondItem="1Zd-4i-qCK" secondAttribute="leading" constant="8" id="mW9-Hs-fcR"/>
+                                                <constraint firstItem="xom-sr-mbJ" firstAttribute="centerY" secondItem="tt7-U3-O1C" secondAttribute="centerY" id="mpj-gy-z0o"/>
                                                 <constraint firstItem="Zsv-RR-6RZ" firstAttribute="leading" secondItem="q6Z-MJ-taq" secondAttribute="trailing" constant="5" id="o9n-Y9-D0G"/>
                                                 <constraint firstAttribute="bottom" secondItem="tt7-U3-O1C" secondAttribute="bottom" constant="9" id="sQl-J6-vvw"/>
                                                 <constraint firstItem="KIT-89-epP" firstAttribute="leading" secondItem="cR4-IO-Gja" secondAttribute="trailing" constant="8" id="u2l-1L-aQX"/>
@@ -153,7 +163,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateLabel" destination="J0V-wr-9Sl" id="v8O-S4-T6V"/>
-                                            <outlet property="favoritesButton" destination="q6Z-MJ-taq" id="l8S-Ft-pzx"/>
                                             <outlet property="favoritesCountLabel" destination="Zsv-RR-6RZ" id="Jbk-rB-eND"/>
                                             <outlet property="fullNameLabel" destination="cR4-IO-Gja" id="bJu-0e-J8w"/>
                                             <outlet property="profileImageView" destination="Pyh-hc-gxx" id="akZ-sZ-gpE"/>
@@ -178,7 +187,7 @@
                             <constraint firstItem="5og-x1-1yf" firstAttribute="leading" secondItem="pug-5a-rGR" secondAttribute="leading" id="hKn-ud-x4r"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Twitter" id="uRE-za-9Dy">
+                    <navigationItem key="navigationItem" id="uRE-za-9Dy">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="Sbt-jY-rau">
                             <connections>
                                 <action selector="logoutTapped:" destination="8hg-gr-Mde" id="Bet-vG-z5I"/>
@@ -410,6 +419,7 @@
     </scenes>
     <resources>
         <image name="favorites" width="700" height="700"/>
+        <image name="reply" width="700" height="700"/>
         <image name="retweet" width="700" height="700"/>
     </resources>
 </document>

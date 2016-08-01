@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ComposeViewController: UIViewController {
+@objc protocol ComposeViewControllerDelegate: class{
+    optional func getTweetID(tweetsViewController: TweetsViewController, tweetsIDPassed tweetID: String)
+}
+
+class ComposeViewController: UIViewController, ComposeViewControllerDelegate {
 
     
     @IBOutlet weak var composeTextView: UITextView!
@@ -22,6 +26,11 @@ class ComposeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //delegate method
+    func getTweetID(tweetsViewController: TweetsViewController, tweetsIDPassed tweetID: String) {
+        print("Tweet id is finally here too : \(tweetID)")
     }
     
     @IBAction func cancelButtonTapped(sender: AnyObject) {

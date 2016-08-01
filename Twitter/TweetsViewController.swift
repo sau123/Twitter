@@ -21,11 +21,15 @@ Delegates
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonsDelegate {
     
+    var _tweetID : String?
     var tweets : [Tweet]?
     @IBOutlet weak var tableView: UITableView!
+    weak var delegate: ComposeViewControllerDelegate?
     
     func tweetIDPassed(tweetCell: TweetCell, tweetIDPassed tweetID: String) {
-            print("send this tweet to another view controller :\(tweetID)")
+        print("send this tweet to another view controller :\(tweetID)")
+        _tweetID = tweetID
+        
     }
     
     func getTimeLineTweets(){
@@ -67,7 +71,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         cell.tweet = tweets![indexPath.row]
-        
         cell.delegate = self
         return cell
     }
@@ -82,19 +85,21 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    /*
+  
      // MARK: - Navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "composeSegue"{
             let navigationController = segue.destinationViewController as! UINavigationController
-            let filtersViewController = navigationController.topViewController as! ComposeViewController
+            let composeViewController = navigationController.topViewController as! ComposeViewController
+            self.delegate = composeViewController
+            
+            delegate?.getTweetID!(self, tweetsIDPassed: _tweetID!)
             
         }
- 
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
-    */
+    
     
     
 }
