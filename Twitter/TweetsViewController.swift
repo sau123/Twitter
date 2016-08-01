@@ -15,20 +15,26 @@ Delegates
  */
 
 @objc protocol ButtonsDelegate: class{
-    optional func tweetIDPassed(tweetCell: TweetCell, tweetIDPassed tweetID: String)
+    optional func getTweetDetails(tweetCell: TweetCell, tweetDetails tweetID: String, userScreenNameWhoPosted: String)
 }
 
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonsDelegate {
     
     var _tweetID : String?
+    var _userScreenNameWhoPosted: String?
     var tweets : [Tweet]?
     @IBOutlet weak var tableView: UITableView!
     weak var delegate: ComposeViewControllerDelegate?
     
-    func tweetIDPassed(tweetCell: TweetCell, tweetIDPassed tweetID: String) {
-        print("send this tweet to another view controller :\(tweetID)")
+    func getTweetDetails(tweetCell: TweetCell, tweetDetails tweetID: String, userScreenNameWhoPosted: String){
+        print("in tweets view controller, got details from tweetcell to tweets view controller")
+        print("tweedID received : "+tweetID)
+        print("userScreenNameWhoPosted : "+userScreenNameWhoPosted)
+        print()
         _tweetID = tweetID
+        _userScreenNameWhoPosted = userScreenNameWhoPosted
+        performSegueWithIdentifier("composeSegue", sender: UIButton())
         
     }
     
@@ -89,17 +95,19 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
      // MARK: - Navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "composeSegue"{
+            print("preparing compose segue !")
             let navigationController = segue.destinationViewController as! UINavigationController
             let composeViewController = navigationController.topViewController as! ComposeViewController
             self.delegate = composeViewController
             
-            delegate?.getTweetID!(self, tweetsIDPassed: _tweetID!)
-            
-        }
+            if _tweetID != nil{ // implies its a reply.
+                delegate?.getTweetDetails!(self, tweetDetails: _tweetID!, userWhoPosted: _userScreenNameWhoPosted!)
+                _tweetID = nil
+            }
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
     
-    
+    }
     
 }

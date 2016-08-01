@@ -18,11 +18,13 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    var tweetID : String!
+    var tweetID : String?
+    var userScreenNameWhoPosted: String?
     weak var delegate: ButtonsDelegate?
     
     var tweet : Tweet! {
         didSet{
+            
             fullNameLabel.text = tweet.name as? String
             tweetTextLabel.text = tweet.text as? String
             favoritesCountLabel.text = "\(tweet.favoritesCount)"
@@ -31,7 +33,8 @@ class TweetCell: UITableViewCell {
             screenNameLabel.text = tweet.screenName as? String
             profileImageView.setImageWithURL(tweet.imageUrl!)
             
-            tweetID = tweet.tweetID as! String
+            userScreenNameWhoPosted = tweet.userScreenNameWhoPosted as? String
+            tweetID = tweet.tweetID as? String
         }
     }
     
@@ -56,7 +59,8 @@ class TweetCell: UITableViewCell {
     
     @IBAction func reTweetButtonTapped(sender: AnyObject) {
         print("tapped retweetbutton")
-        delegate?.tweetIDPassed!(self, tweetIDPassed: tweetID)
+        
+        delegate?.getTweetDetails!(self, tweetDetails: tweetID!, userScreenNameWhoPosted: userScreenNameWhoPosted!)
     }
 
 }
