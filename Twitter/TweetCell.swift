@@ -17,6 +17,8 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoritesButton: UIButton!
     
     var tweet : Tweet! {
         didSet{
@@ -42,14 +44,16 @@ class TweetCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    
+    @IBAction func retweetButtonClicked(sender: AnyObject) {
+        
+    }
+    
 
 }

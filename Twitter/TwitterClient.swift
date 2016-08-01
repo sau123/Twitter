@@ -17,6 +17,22 @@ class TwitterClient: BDBOAuth1SessionManager {
     var loginSuccess: (() -> ())?
     var loginFailure: ((NSError) -> ())?
     
+//    func closureTest(completion : ()->()) {
+//    // 50 sec block
+//        
+//    }
+
+//    func closureTestWith2Params(success: ()->(), failure : (error : NSError)->()) {
+////        let isSuccess : Bool = true
+////        // some logic that isSuccess
+////        let error : NSError()
+////        if isSuccess {
+////            success()
+////        } else {
+////            failure(error)
+////        }
+////        
+//    }
     func login(success: () -> (), failure: (NSError) -> ()) {
         
         loginSuccess = success
@@ -27,6 +43,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             
             let url = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")!
             UIApplication.sharedApplication().openURL(url)
+            
             
         }) {(error: NSError!) -> Void in
             print("error : \(error.localizedDescription)")

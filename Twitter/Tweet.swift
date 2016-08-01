@@ -26,6 +26,7 @@ class Tweet: NSObject {
         favoritesCount = (dictionary["favourites_count"] as? Int) ?? 0
         screenName = dictionary["user"]!["screen_name"] as? String
         name = dictionary["user"]!["name"] as? String
+        tweetID = dictionary["user"]!["id_str"] as? String
         
         let imageString = dictionary["user"]!["profile_image_url_https"] as? String
         imageUrl = NSURL(string: imageString!)
