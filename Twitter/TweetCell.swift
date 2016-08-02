@@ -23,6 +23,7 @@ class TweetCell: UITableViewCell {
     var userScreenNameWhoPosted: String?
     weak var delegate: ButtonsDelegate? //replydelegate
     weak var favoritesDelegate: FavoritesDelegate?
+    weak var retweetDelegate: RetweetDelegtate?
     
     var tweet : Tweet! {
         didSet{
@@ -63,6 +64,11 @@ class TweetCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    @IBAction func retweetButtonTapped(sender: AnyObject){
+        print("tapped retweetButtonTapped")
+        retweetDelegate?.postRetweet!(self, postRetweets: tweetID!)
     }
     
     @IBAction func favoritesButtonTapped(sender: AnyObject){

@@ -23,8 +23,12 @@ Delegates
     optional func getFavorites(tweetCell: TweetCell, getFavorites tweetID: String)
 }
 
+@objc protocol RetweetDelegtate: class{
+    optional func postRetweet(tweetCell: TweetCell, postRetweets tweetID: String)
+}
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonsDelegate, FavoritesDelegate{
+
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonsDelegate, FavoritesDelegate, RetweetDelegtate{
     
     var _tweetID : String?
     var _userScreenNameWhoPosted: String?
@@ -48,9 +52,24 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     self.tableView.triggerPullToRefresh()
                     }, failure: { (error: NSError) in
                 })
-            
         }
-//        tableView.reloadData()
+    }
+    
+    // implementaion of retweet delegate
+    func postRetweet(tweetCell: TweetCell, postRetweets tweetID: String) {
+        print("in tweets view controller, got details from tweetcell to tweets view controller")
+        print("tweetID received : "+tweetID)
+        
+        TwitterClient.sharedInstance.reTweet(tweetID, success: { 
+            self.tableView.triggerPullToRefresh()
+        }, failure: { (error: NSError) in
+            print("error while retweeting : \(error.localizedDescription)")
+            let alert = UIAlertController(title: "Retweet Error", message: "You have already sent this Tweet", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+                // code to show up alert that it cant be retweeted.
+        })
+        
     }
     
     //implementation of replyDelegate buttonsdelegate
@@ -100,6 +119,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.tweet = tweets![indexPath.row]
         cell.delegate = self
         cell.favoritesDelegate = self
+        cell.retweetDelegate = self
         return cell
     }
     

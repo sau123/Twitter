@@ -92,7 +92,19 @@ class TwitterClient: BDBOAuth1SessionManager {
                 print("Error posting tweet : \(error.localizedDescription)")
         })
     }
-    
+    //https://api.twitter.com/1.1/statuses/retweet/760168682102353920.json
+    func reTweet(tweetId: String, success: () -> (), failure: (NSError) -> ()){
+//        var params : [String:String] = [:]
+//        params["id"] = tweetId
+        POST("/1.1/statuses/retweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print("sucess retweeting!")
+            success()
+        }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+            print("error while retweeting : \(error.localizedDescription)")
+            failure(error)
+        })
+        
+    }
     
     
     func favoriteTweet(tweetId: String, success: () -> (), failure: (NSError) -> ()){
