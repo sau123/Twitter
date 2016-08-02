@@ -224,17 +224,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-AP-yY5">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="203"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="203" id="dYb-AY-7PP"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characters Left:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lc4-vV-EkL">
+                                <rect key="frame" x="137" y="211" width="124" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61z-NE-XWz">
+                                <rect key="frame" x="271" y="211" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="lc4-vV-EkL" secondAttribute="trailing" constant="59" id="RFe-ay-oYQ"/>
                             <constraint firstAttribute="trailing" secondItem="UPE-AP-yY5" secondAttribute="trailing" id="XLz-gb-e8x"/>
+                            <constraint firstItem="lc4-vV-EkL" firstAttribute="top" secondItem="UPE-AP-yY5" secondAttribute="bottom" constant="8" id="jTj-ch-e1X"/>
+                            <constraint firstAttribute="trailing" secondItem="61z-NE-XWz" secondAttribute="trailing" constant="20" id="jpT-3E-aWI"/>
+                            <constraint firstItem="61z-NE-XWz" firstAttribute="top" secondItem="UPE-AP-yY5" secondAttribute="bottom" constant="8" id="sVh-2U-lAB"/>
                             <constraint firstItem="UPE-AP-yY5" firstAttribute="leading" secondItem="NWE-i9-s3m" secondAttribute="leading" id="tAo-aV-g7k"/>
-                            <constraint firstItem="CIm-14-hWB" firstAttribute="top" secondItem="UPE-AP-yY5" secondAttribute="bottom" id="wJN-0Q-zGb"/>
                             <constraint firstItem="UPE-AP-yY5" firstAttribute="top" secondItem="NWE-i9-s3m" secondAttribute="top" id="yTA-yJ-iPf"/>
                         </constraints>
                     </view>
@@ -251,6 +269,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="charactersLeft" destination="61z-NE-XWz" id="Ywt-3q-g45"/>
                         <outlet property="composeTextView" destination="UPE-AP-yY5" id="P9W-Hr-BdC"/>
                     </connections>
                 </viewController>

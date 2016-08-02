@@ -60,6 +60,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("in tweets view controller, got details from tweetcell to tweets view controller")
         print("tweetID received : "+tweetID)
         
+        var t : Tweet
+        
+        self.tableView.
+        
         TwitterClient.sharedInstance.reTweet(tweetID, success: { 
             self.tableView.triggerPullToRefresh()
         }, failure: { (error: NSError) in

@@ -12,18 +12,44 @@ import UIKit
     optional func getTweetDetails(tweetsViewController: TweetsViewController, tweetDetails tweetID: String, userWhoPosted: String)
 }
 
-class ComposeViewController: UIViewController, ComposeViewControllerDelegate {
+class ComposeViewController: UIViewController, ComposeViewControllerDelegate, UITextViewDelegate {
 
+    @IBOutlet weak var charactersLeft: UILabel!
     @IBOutlet weak var composeTextView: UITextView!
     var _userWhoPosted: String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        composeTextView.delegate = self
+        
         if _userWhoPosted != nil{
             composeTextView.text = "@\(_userWhoPosted!)"
         }
         _userWhoPosted = nil
-
-        // Do any additional setup after loading the view.
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        let charsLeft = 140 - textView.text.characters.count
+        
+        if charsLeft >= 0{
+        charactersLeft.text =  "\(charsLeft)"
+            if charsLeft < 10{
+                charactersLeft.textColor = UIColor.redColor()
+            }else if charsLeft == 10{
+                charactersLeft.textColor = UIColor.blackColor()
+            }
+        }else{
+        let alert = UIAlertController(title: "Compose Tweet Error", message: "Tweet can not exceed 140 characters", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+//            let msg = textView.text
+//            let start = msg.startIndex
+//            let end = msg.endIndex.advancedBy(-1) // go one char back.
+//            let substring = msg[start..<end]
+//            textView.text = substring
+            
+        self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
