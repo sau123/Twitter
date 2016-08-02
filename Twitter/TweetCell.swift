@@ -33,7 +33,7 @@ class TweetCell: UITableViewCell {
             }else{
                 favouriteImage.alpha = 1
             }
-            
+            print(tweet)
             fullNameLabel.text = tweet.name as? String
             tweetTextLabel.text = tweet.text as? String
             favoritesCountLabel.text = "\(tweet.favoritesCount)"

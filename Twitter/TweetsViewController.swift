@@ -137,6 +137,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        performSegueWithIdentifier("detailsSegue", sender: self)
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -163,7 +168,16 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
-     }
+        }else if segue.identifier == "detailsSegue" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let detailsViewController = navigationController.topViewController as! DetailViewController
+            let tweetCell = sender as! TweetCell
+            
+            let index = tableView.indexPathForCell(tweetCell)
+            print("cell at index clicked !",index?.row)
+            detailsViewController.tweet = tweets![(index?.row)!]
+            
+        }
     
     }
     

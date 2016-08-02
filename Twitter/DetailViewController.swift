@@ -14,11 +14,33 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var detailedImageLabel: UIImageView!
+    @IBOutlet weak var reTweetLabel: UILabel!
+    @IBOutlet weak var favoritesLabel: UILabel!
+    @IBOutlet weak var favoritesImage: UIButton!
 
+    
+    var tweet : Tweet!
+//            if tweet.favorited == 0{
+//                favoritesImage.alpha = 0.5
+//            }else{
+//                favoritesImage.alpha = 1
+//            }
+//            print(tweet.name)
+    
+//            userScreenNameWhoPosted = tweet.userScreenNameWhoPosted as? String
+//            tweetID = tweet.tweetID as? String
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        detailedNameLabel.text = tweet.name as? String
+        tweetLabel.text = tweet.text as? String
+        favoritesLabel.text = "\(tweet.favoritesCount)"
+        reTweetLabel.text = "\(tweet.retweetCount)"
+        
+        screenNameLabel.text = tweet.screenName as? String
+        detailedImageLabel.setImageWithURL(tweet.imageUrl!)
+        
     }
 
     override func didReceiveMemoryWarning() {
