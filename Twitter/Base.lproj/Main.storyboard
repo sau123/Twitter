@@ -80,12 +80,6 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="There's a power, timing and also a lilt to K L Rahul's batting that makes him compelling watching. Fine young player!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dX-7o-Ol2">
-                                                    <rect key="frame" x="67" y="25" width="245" height="47"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zsv-RR-6RZ">
                                                     <rect key="frame" x="163" y="80" width="25" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -113,7 +107,7 @@
                                                     </constraints>
                                                     <state key="normal" image="favorites"/>
                                                     <connections>
-                                                        <action selector="favoritesTapped:" destination="8hg-gr-Mde" eventType="touchUpInside" id="CJX-8l-jJh"/>
+                                                        <action selector="favoritesButtonTapped:" destination="or1-gQ-nmh" eventType="touchUpInside" id="HV6-gc-rfk"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tt7-U3-O1C">
@@ -132,9 +126,15 @@
                                                     </constraints>
                                                     <state key="normal" image="reply"/>
                                                     <connections>
-                                                        <action selector="reTweetButtonTapped:" destination="or1-gQ-nmh" eventType="touchUpInside" id="pKQ-zF-SWH"/>
+                                                        <action selector="replyButtonTapped:" destination="or1-gQ-nmh" eventType="touchUpInside" id="PWY-MV-Khu"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="There's a power, timing and also a lilt to K L Rahul's batting that makes him compelling watching. Fine young player!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dX-7o-Ol2">
+                                                    <rect key="frame" x="67" y="25" width="245" height="47"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Zsv-RR-6RZ" firstAttribute="centerY" secondItem="tt7-U3-O1C" secondAttribute="centerY" id="2CV-1z-DQv"/>
@@ -164,6 +164,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="J0V-wr-9Sl" id="v8O-S4-T6V"/>
                                             <outlet property="favoritesCountLabel" destination="Zsv-RR-6RZ" id="Jbk-rB-eND"/>
+                                            <outlet property="favouriteImage" destination="q6Z-MJ-taq" id="BXD-6p-cAe"/>
                                             <outlet property="fullNameLabel" destination="cR4-IO-Gja" id="bJu-0e-J8w"/>
                                             <outlet property="profileImageView" destination="Pyh-hc-gxx" id="akZ-sZ-gpE"/>
                                             <outlet property="reTweetCountLabel" destination="1b6-R0-RIY" id="Qhq-tT-7BV"/>

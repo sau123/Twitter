@@ -78,6 +78,8 @@ class TwitterClient: BDBOAuth1SessionManager {
             self.loginFailure?(error)
         }
     }
+//    func homeTimeline(success:([Tweet]) -> (), failure: (NSError) -> ()) {
+
     
     
     func postTweet(composeTweet: String){
@@ -87,10 +89,39 @@ class TwitterClient: BDBOAuth1SessionManager {
             print("success posting tweet")
             print("response from success of tweet : \(response)")
         },failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-                print("task : \(task)")
                 print("Error posting tweet : \(error.localizedDescription)")
         })
     }
+    
+    
+    
+    func favoriteTweet(tweetId: String, success: () -> (), failure: (NSError) -> ()){
+        var params : [String: String] = [:]
+        params["id"]=tweetId
+        POST("1.1/favorites/create.json", parameters: params, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print("success favorting the  tweet")
+            print("response after favoriting the tweet : \(response)")
+            success()
+            },failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("Error while favoriting the tweet : \(error.localizedDescription)")
+                print("make a request for defavoriting")
+                failure(error)
+        })
+    }
+    
+    func deFavoriteTweet(tweetId: String, success: () -> (), failure: (NSError) -> ()){
+        var params : [String: String] = [:]
+        params["id"] = tweetId
+        POST("1.1/favorites/destroy.json", parameters: params, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print("success defavorting the  tweet")
+            print("response after defavoriting the tweet : \(response)")
+            success()
+            },failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("Error while defavoriting the tweet : \(error.localizedDescription)")
+                failure(error)
+        })
+    }
+
     
     func homeTimeline(success:([Tweet]) -> (), failure: (NSError) -> ()) {
         

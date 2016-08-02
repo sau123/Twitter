@@ -17,13 +17,21 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var favouriteImage: UIButton!
     
     var tweetID : String?
     var userScreenNameWhoPosted: String?
-    weak var delegate: ButtonsDelegate?
+    weak var delegate: ButtonsDelegate? //replydelegate
+    weak var favoritesDelegate: FavoritesDelegate?
     
     var tweet : Tweet! {
         didSet{
+//            favouriteImage.alpha = 0.5
+            if tweet.favorited == 0{
+                favouriteImage.alpha = 0.5
+            }else{
+                favouriteImage.alpha = 1
+            }
             
             fullNameLabel.text = tweet.name as? String
             tweetTextLabel.text = tweet.text as? String
@@ -57,8 +65,13 @@ class TweetCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    @IBAction func reTweetButtonTapped(sender: AnyObject) {
-        print("tapped retweetbutton")
+    @IBAction func favoritesButtonTapped(sender: AnyObject){
+        print("tapped favoritesButtonTapped")
+        favoritesDelegate?.getFavorites!(self, getFavorites: tweetID!)
+    }
+    
+    @IBAction func replyButtonTapped(sender: AnyObject) {
+        print("tapped replyButtonTapped")
         
         delegate?.getTweetDetails!(self, tweetDetails: tweetID!, userScreenNameWhoPosted: userScreenNameWhoPosted!)
     }

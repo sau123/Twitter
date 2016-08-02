@@ -14,12 +14,17 @@ import SVPullToRefresh
 Delegates
  */
 
+// this is basically reply delegate
 @objc protocol ButtonsDelegate: class{
     optional func getTweetDetails(tweetCell: TweetCell, tweetDetails tweetID: String, userScreenNameWhoPosted: String)
 }
 
+@objc protocol FavoritesDelegate: class{
+    optional func getFavorites(tweetCell: TweetCell, getFavorites tweetID: String)
+}
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonsDelegate {
+
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonsDelegate, FavoritesDelegate{
     
     var _tweetID : String?
     var _userScreenNameWhoPosted: String?
@@ -27,6 +32,28 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     weak var delegate: ComposeViewControllerDelegate?
     
+    
+    //implementation of favorites delegate
+    func getFavorites(tweetCell: TweetCell, getFavorites tweetID: String) {
+        print("in tweets view controller, got details from tweetcell to tweets view controller")
+        print("tweedID received : "+tweetID)
+        TwitterClient.sharedInstance.favoriteTweet(tweetID, success: {
+            self.tableView.triggerPullToRefresh()
+            //reload mayb!
+        }) { (error: NSError) in
+                print("Error in getFavorites implementation : \(error.code)")
+            
+//                make a network call to defavorite
+                TwitterClient.sharedInstance.deFavoriteTweet(tweetID, success: {
+                    self.tableView.triggerPullToRefresh()
+                    }, failure: { (error: NSError) in
+                })
+            
+        }
+//        tableView.reloadData()
+    }
+    
+    //implementation of replyDelegate buttonsdelegate
     func getTweetDetails(tweetCell: TweetCell, tweetDetails tweetID: String, userScreenNameWhoPosted: String){
         print("in tweets view controller, got details from tweetcell to tweets view controller")
         print("tweedID received : "+tweetID)
@@ -54,12 +81,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewDidLoad() {
-//        TwitterClient.sharedInstance.closureTestWith2Params({
-//            <#code#>
-//        }) { (error : NSError) in
-//                code
-//        }
-        
         
         super.viewDidLoad()
         tableView.delegate = self
@@ -78,6 +99,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         cell.tweet = tweets![indexPath.row]
         cell.delegate = self
+        cell.favoritesDelegate = self
         return cell
     }
     
