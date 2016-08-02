@@ -77,10 +77,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.tableView.triggerPullToRefresh()
                 }, failure: { (error: NSError) in
             })
-//            let alert = UIAlertController(title: "Retweet Error", message: "You have already sent this Tweet", preferredStyle: UIAlertControllerStyle.Alert)
-//            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-//            self.presentViewController(alert, animated: true, completion: nil)
-                // code to show up alert that it cant be retweeted.
         })
         
     }
@@ -97,8 +93,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-    func getTimeLineTweets(){
-        TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
+    func getTimeLineTweets(count: String?){
+        TwitterClient.sharedInstance.homeTimeline(count, success: { (tweets: [Tweet]) -> () in
             print("refreshing")
             self.tweets = tweets
             self.tableView.reloadData()
@@ -109,9 +105,20 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func refreshControlInit(){
         self.tableView.addPullToRefreshWithActionHandler {
             print("pulled!")
-            self.getTimeLineTweets()
+            let count = self.tweets?.count
+            self.getTimeLineTweets("\(count)")
+        }
+        
+        self.tableView.addInfiniteScrollingWithActionHandler {
+            var size = self.tweets!.count
+            size += 5;
+            print("infinite scroll pulled : \(size)")
+
+            self.getTimeLineTweets("\(size)")
+            self.tableView.infiniteScrollingView.stopAnimating()
         }
     }
+    
     
     override func viewDidLoad() {
         
@@ -120,7 +127,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         
         refreshControlInit()
-        self.getTimeLineTweets()
+        self.getTimeLineTweets("\(6)") // for now, intially table will have 6 cells
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

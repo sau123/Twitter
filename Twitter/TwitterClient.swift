@@ -152,9 +152,17 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     
-    func homeTimeline(success:([Tweet]) -> (), failure: (NSError) -> ()) {
+    func homeTimeline(count : String?, success:([Tweet]) -> (), failure: (NSError) -> ()) {
         
-        GET("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+        print("count of tweets : \(count)")
+        var params : [String : String] = [:]
+        if count != nil{
+            params["count"] = "\(count!)"
+        }else{
+            params["count"] = "\(5)"
+        }
+        
+        GET("1.1/statuses/home_timeline.json", parameters: params, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             
             print("Ressponse :",response)
             

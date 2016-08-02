@@ -86,7 +86,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pyh-hc-gxx">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitterImage" translatesAutoresizingMaskIntoConstraints="NO" id="Pyh-hc-gxx">
                                                     <rect key="frame" x="8" y="5" width="55" height="55"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="55" id="CsB-C5-zfe"/>
@@ -295,7 +295,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s4C-bZ-upL">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitterImage" translatesAutoresizingMaskIntoConstraints="NO" id="s4C-bZ-upL">
                                 <rect key="frame" x="15" y="79" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="AHw-HG-XjH"/>
@@ -465,5 +465,6 @@
         <image name="favorites" width="700" height="700"/>
         <image name="reply" width="700" height="700"/>
         <image name="retweet" width="700" height="700"/>
+        <image name="twitterImage" width="500" height="500"/>
     </resources>
 </document>

@@ -18,7 +18,7 @@ The following user stories are completed:
 * [x] Optional: Retweeting and favoriting should increment the retweet and favorite count.
 * [x] Optional: User should be able to unretweet and unfavorite and should decrement the retweet and favorite count. Refer to this guide for help on implementing unretweeting.
 * [x] Optional: Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
-* [ ] Optional: User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
+* [x] Optional: User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 
 
 ##Video Walkthrough
