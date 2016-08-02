@@ -139,7 +139,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        performSegueWithIdentifier("detailsSegue", sender: self)
+//        performSegueWithIdentifier("detailsSegue", sender: self)
     }
     
     
