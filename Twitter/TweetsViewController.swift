@@ -27,8 +27,11 @@ Delegates
     optional func postRetweet(tweetCell: TweetCell, postRetweets tweetID: String)
 }
 
+@objc protocol ComposedTweetDelegate: class{
+    optional func composeTweet(tweet: Tweet)
+}
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonsDelegate, FavoritesDelegate, RetweetDelegtate{
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ButtonsDelegate, FavoritesDelegate, RetweetDelegtate, ComposedTweetDelegate{
     
     var _tweetID : String?
     var _userScreenNameWhoPosted: String?
@@ -36,6 +39,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     weak var delegate: ComposeViewControllerDelegate?
     
+    //implemenation of composed delegate
+    func composeTweet(tweet: Tweet) {
+        tweets?.insert(tweet, atIndex: 0)
+        tableView.reloadData()
+        // add the tweet to the tweets and reload.
+    }
     
     //implementation of favorites delegate
     func getFavorites(tweetCell: TweetCell, getFavorites tweetID: String) {
@@ -60,17 +69,17 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("in tweets view controller, got details from tweetcell to tweets view controller")
         print("tweetID received : "+tweetID)
         
-        var t : Tweet
-        
-        self.tableView.
-        
         TwitterClient.sharedInstance.reTweet(tweetID, success: { 
             self.tableView.triggerPullToRefresh()
         }, failure: { (error: NSError) in
             print("error while retweeting : \(error.localizedDescription)")
-            let alert = UIAlertController(title: "Retweet Error", message: "You have already sent this Tweet", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            TwitterClient.sharedInstance.unRetweet(tweetID, success: { 
+                self.tableView.triggerPullToRefresh()
+                }, failure: { (error: NSError) in
+            })
+//            let alert = UIAlertController(title: "Retweet Error", message: "You have already sent this Tweet", preferredStyle: UIAlertControllerStyle.Alert)
+//            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
                 // code to show up alert that it cant be retweeted.
         })
         
@@ -98,7 +107,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     func refreshControlInit(){
-        tableView.addPullToRefreshWithActionHandler {
+        self.tableView.addPullToRefreshWithActionHandler {
+            print("pulled!")
             self.getTimeLineTweets()
         }
     }
@@ -145,8 +155,9 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let navigationController = segue.destinationViewController as! UINavigationController
             let composeViewController = navigationController.topViewController as! ComposeViewController
             self.delegate = composeViewController
+            composeViewController.composeTweetDelegate = self
             
-            if _tweetID != nil{ // implies its a reply.
+            if _tweetID != nil { // implies its a reply.
                 delegate?.getTweetDetails!(self, tweetDetails: _tweetID!, userWhoPosted: _userScreenNameWhoPosted!)
                 _tweetID = nil
             }

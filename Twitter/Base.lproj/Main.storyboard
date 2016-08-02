@@ -157,7 +157,7 @@
                                                 <constraint firstItem="Pyh-hc-gxx" firstAttribute="leading" secondItem="1Zd-4i-qCK" secondAttribute="leading" constant="8" id="mW9-Hs-fcR"/>
                                                 <constraint firstItem="xom-sr-mbJ" firstAttribute="centerY" secondItem="tt7-U3-O1C" secondAttribute="centerY" id="mpj-gy-z0o"/>
                                                 <constraint firstItem="Zsv-RR-6RZ" firstAttribute="leading" secondItem="q6Z-MJ-taq" secondAttribute="trailing" constant="5" id="o9n-Y9-D0G"/>
-                                                <constraint firstAttribute="bottom" secondItem="tt7-U3-O1C" secondAttribute="bottom" constant="9" id="sQl-J6-vvw"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tt7-U3-O1C" secondAttribute="bottom" constant="9" id="sQl-J6-vvw"/>
                                                 <constraint firstItem="KIT-89-epP" firstAttribute="leading" secondItem="cR4-IO-Gja" secondAttribute="trailing" constant="8" id="u2l-1L-aQX"/>
                                                 <constraint firstItem="q6Z-MJ-taq" firstAttribute="leading" secondItem="1b6-R0-RIY" secondAttribute="trailing" constant="22" id="uKC-MR-4bR"/>
                                                 <constraint firstAttribute="trailing" secondItem="7dX-7o-Ol2" secondAttribute="trailing" constant="8" id="wjL-ld-8Km"/>
@@ -225,7 +225,7 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-AP-yY5">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="203"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.03125" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="203" id="dYb-AY-7PP"/>
                                 </constraints>

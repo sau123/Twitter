@@ -17,6 +17,9 @@ class ComposeViewController: UIViewController, ComposeViewControllerDelegate, UI
     @IBOutlet weak var charactersLeft: UILabel!
     @IBOutlet weak var composeTextView: UITextView!
     var _userWhoPosted: String?
+    var _replyToTweetId: String? = ""
+    weak var composeTweetDelegate: ComposedTweetDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +29,7 @@ class ComposeViewController: UIViewController, ComposeViewControllerDelegate, UI
             composeTextView.text = "@\(_userWhoPosted!)"
         }
         _userWhoPosted = nil
+        _replyToTweetId = nil
     }
     
     func textViewDidChange(textView: UITextView) {
@@ -41,12 +45,6 @@ class ComposeViewController: UIViewController, ComposeViewControllerDelegate, UI
         }else{
         let alert = UIAlertController(title: "Compose Tweet Error", message: "Tweet can not exceed 140 characters", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-//            let msg = textView.text
-//            let start = msg.startIndex
-//            let end = msg.endIndex.advancedBy(-1) // go one char back.
-//            let substring = msg[start..<end]
-//            textView.text = substring
-            
         self.presentViewController(alert, animated: true, completion: nil)
             
         }
@@ -63,6 +61,8 @@ class ComposeViewController: UIViewController, ComposeViewControllerDelegate, UI
         print("tweedID received : "+tweetID)
         print("userScreenNameWhoPosted : "+userWhoPosted)
         _userWhoPosted = userWhoPosted
+        _replyToTweetId = tweetID
+        
         print()
     }
     
@@ -82,7 +82,16 @@ class ComposeViewController: UIViewController, ComposeViewControllerDelegate, UI
             alertController.addAction(OKAction)
             self.presentViewController(alertController, animated: true, completion:  nil)
         }else{
-            TwitterClient.sharedInstance.postTweet(composeTextView.text!)
+//            TwitterClient.sharedInstance.postTweet(composeTextView.text!)
+            TwitterClient.sharedInstance.postTweet(composeTextView.text!, replyToTweetId: _replyToTweetId ?? "", success: { (tweet: Tweet) in
+                print("success composing tweet : \(tweet.name)")
+                print("success composing tweet : \(tweet.text)")
+                print(tweet)
+                self.composeTweetDelegate?.composeTweet!(tweet)
+                
+                }, failure: { (error: NSError) in
+                    print("error while composing tweet : \(error.localizedDescription)")
+            })
             dismissViewControllerAnimated(true, completion: nil)
         }
         
