@@ -20,6 +20,7 @@ class Tweet: NSObject {
     var tweetID: NSString?
     var userScreenNameWhoPosted: NSString?
     var favorited: Int?
+    var duration: String?
     
     init(dictionary: NSDictionary){
         text = dictionary["text"] as? String
@@ -41,6 +42,45 @@ class Tweet: NSObject {
             let formatter = NSDateFormatter()
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
             timestamp = formatter.dateFromString(timestampString)
+        }
+        
+        let dateMakerFormatter = NSDateFormatter()
+        let userCalendar = NSCalendar.currentCalendar()
+        
+        dateMakerFormatter.dateFormat = "yyyy/MM/dd hh:mm a Z"
+        let endTime = NSDate()
+        let hourMinuteSecondsComponents: NSCalendarUnit = [.Hour, .Minute, .Second]
+        let timeDifference = userCalendar.components(
+            hourMinuteSecondsComponents,
+            fromDate: timestamp!,
+            toDate: endTime,
+            options: [])
+        
+        var hr : String = ""
+        if timeDifference.hour > 0 {
+            if timeDifference.hour == 1{
+                hr = "\(timeDifference.hour)hr"
+            }
+            if timeDifference.hour > 1{
+                hr += "s"
+            }
+        }
+        
+        let min : String = ""
+        if timeDifference.minute > 0 {
+                hr = "\(timeDifference.minute)m"
+        }
+        
+        let sec : String = ""
+        if timeDifference.second > 0 {
+            hr = "\(timeDifference.second)s"
+        }
+        
+        print("time : \(hr)\(min)\(sec)")
+        self.duration = "\(hr)\(min)\(sec)"
+        
+        if "\(hr)\(min)\(sec)".isEmpty {
+            self.duration = "1s"
         }
     }
     

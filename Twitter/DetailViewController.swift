@@ -37,7 +37,7 @@ class DetailViewController: UIViewController {
         tweetLabel.text = tweet.text as? String
         favoritesLabel.text = "\(tweet.favoritesCount)"
         reTweetLabel.text = "\(tweet.retweetCount)"
-        
+        dateLabel.text = "\(tweet.duration)"
         screenNameLabel.text = tweet.screenName as? String
         detailedImageLabel.setImageWithURL(tweet.imageUrl!)
         

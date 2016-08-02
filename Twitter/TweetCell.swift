@@ -44,6 +44,7 @@ class TweetCell: UITableViewCell {
             
             userScreenNameWhoPosted = tweet.userScreenNameWhoPosted as? String
             tweetID = tweet.tweetID as? String
+            dateLabel.text = tweet.duration
         }
     }
     
