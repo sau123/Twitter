@@ -69,12 +69,12 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@CricketWallah" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIT-89-epP">
-                                                    <rect key="frame" x="163" y="5" width="96" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <rect key="frame" x="163" y="6" width="83" height="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CricketWallah" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR4-IO-Gja">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="CricketWallah" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR4-IO-Gja">
                                                     <rect key="frame" x="67" y="5" width="88" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -160,6 +160,7 @@
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tt7-U3-O1C" secondAttribute="bottom" constant="9" id="sQl-J6-vvw"/>
                                                 <constraint firstItem="KIT-89-epP" firstAttribute="leading" secondItem="cR4-IO-Gja" secondAttribute="trailing" constant="8" id="u2l-1L-aQX"/>
                                                 <constraint firstItem="q6Z-MJ-taq" firstAttribute="leading" secondItem="1b6-R0-RIY" secondAttribute="trailing" constant="22" id="uKC-MR-4bR"/>
+                                                <constraint firstItem="J0V-wr-9Sl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KIT-89-epP" secondAttribute="trailing" constant="3" id="uaj-6a-aBy"/>
                                                 <constraint firstAttribute="trailing" secondItem="7dX-7o-Ol2" secondAttribute="trailing" constant="8" id="wjL-ld-8Km"/>
                                                 <constraint firstItem="q6Z-MJ-taq" firstAttribute="centerY" secondItem="tt7-U3-O1C" secondAttribute="centerY" id="zxU-u2-XuC"/>
                                             </constraints>
