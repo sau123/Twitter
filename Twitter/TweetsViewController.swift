@@ -38,6 +38,9 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var tweets : [Tweet]?
     @IBOutlet weak var tableView: UITableView!
     weak var delegate: ComposeViewControllerDelegate?
+    var _userScreenName : String? = nil
+    var _userid : String? = nil
+    var _tweet : Tweet? = nil
     
     //implemenation of composed delegate
     func composeTweet(tweet: Tweet) {
@@ -152,7 +155,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tappedOnImage(sender:UITapGestureRecognizer){
         print("tapped : ",sender.view!.tag)
+        let tag = sender.view!.tag
+        
+        
+        self._tweet = self.tweets![tag]
+        print("user id : ",self._tweet?.screenName)
+        _userScreenName = self._tweet!.screenName! as String
+        
         performSegueWithIdentifier("profileSegue", sender: sender)
+        
     }
     
     
@@ -196,6 +207,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print("cell at index clicked !",index?.row)
             detailsViewController.tweet = tweets![(index?.row)!]
             
+        }else if segue.identifier == "profileSegue" {
+            let profileViewController = segue.destinationViewController as! ProfileViewController
+            profileViewController.tweet = self._tweet
+            profileViewController.userScreenName = _userScreenName
         }
     
     }

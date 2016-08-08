@@ -13,13 +13,22 @@ import SVPullToRefresh
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var screenNameLabel: UILabel!
+    @IBOutlet weak var fullNameLabel: UILabel!
+    @IBOutlet weak var followersCountLabel: UILabel!
+    @IBOutlet weak var followingCountLabel: UILabel!
+    @IBOutlet weak var tweetCountLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
     
     var tweets : [Tweet]?
+    var tweet : Tweet?
+     
+    var userScreenName : String?
 
+    // if userid is nil, implies loggedIn user, else image tapped in tweetsVC
     
-    
-    func getTimeLineTweets(count: String?){
-        TwitterClient.sharedInstance.userTimeline(count, success: { (tweets: [Tweet]) -> () in
+    func getTimeLineTweets(count: String?, userID: String?){
+        TwitterClient.sharedInstance.userTimeline(count, userId: userID,success: { (tweets: [Tweet]) -> () in
             print("refreshing")
             self.tweets = tweets
             self.tableView.reloadData()
@@ -32,7 +41,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.addPullToRefreshWithActionHandler {
             print("pulled!")
             let count = self.tweets?.count
-            self.getTimeLineTweets("\(count)")
+            self.getTimeLineTweets("\(count)", userID: self.userScreenName)
         }
         
         self.tableView.addInfiniteScrollingWithActionHandler {
@@ -40,21 +49,32 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             size += 5;
             print("infinite scroll pulled : \(size)")
             
-            self.getTimeLineTweets("\(size)")
+            self.getTimeLineTweets("\(size)", userID: self.userScreenName)
             self.tableView.infiniteScrollingView.stopAnimating()
         }
     }
     
+    func setView(){
+        screenNameLabel.text = tweet!.screenName as? String
+        fullNameLabel.text = tweet!.name as? String
+        followersCountLabel.text = "\(tweet!.followersCount!)"
+        followingCountLabel.text = "\(tweet!.followingCount!)"
+        tweetCountLabel.text = "\(tweet!.tweetsCount!)"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         print("viewDidLoad, ProfileViewController")
-
+        print(userScreenName)
+        print("printed user id")
+        
+        setView()
+        
         tableView.delegate = self
         tableView.dataSource = self
         refreshControlInit()
-        self.getTimeLineTweets("\(6)") // for now, intially table will have 6 cells
+        self.getTimeLineTweets("\(6)", userID: self.userScreenName) // for now, intially table will have 6 cells
         
     }
 
@@ -70,9 +90,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("ProfileCell", forIndexPath: indexPath) as! ProfileCell
-        
         cell.tweet = tweets![indexPath.row]
-        
         return cell
     }
 

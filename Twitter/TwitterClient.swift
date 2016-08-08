@@ -176,14 +176,22 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func userTimeline(count : String?, success:([Tweet]) -> (), failure: (NSError) -> ()) {
+    func userTimeline(count : String?, userId: String?, success:([Tweet]) -> (), failure: (NSError) -> ()) {
         
         var params : [String : String] = [:]
+        
+        print("user id in userTimeLine",userId)
+        if userId != nil{
+            params["screen_name"] = "\(userId!)"
+        }
+        
         if count != nil{
             params["count"] = "\(count!)"
         }else{
             params["count"] = "\(5)"
         }
+        
+        print("params : \(params)")
         
         GET("1.1/statuses/user_timeline.json", parameters: params, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             
