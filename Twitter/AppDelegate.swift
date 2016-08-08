@@ -42,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserverForName(User.userDidLogoutNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (NSNotification) -> Void in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateInitialViewController()
-//            let vc = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController")
             self.window?.rootViewController = vc
         }
         

@@ -56,6 +56,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        print("didSelect : \(indexPath.row)")
         hamburgerViewController.contentViewController = viewControllers[indexPath.row]
     }
 

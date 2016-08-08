@@ -140,8 +140,21 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.delegate = self
         cell.favoritesDelegate = self
         cell.retweetDelegate = self
+        
+        cell.profileImageView.userInteractionEnabled = true
+        cell.profileImageView.tag = indexPath.row
+        let imageTap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tappedOnImage:")
+        imageTap.numberOfTapsRequired = 1
+        cell.profileImageView.addGestureRecognizer(imageTap)
+        
         return cell
     }
+    
+    func tappedOnImage(sender:UITapGestureRecognizer){
+        print("tapped : ",sender.view!.tag)
+        performSegueWithIdentifier("profileSegue", sender: sender)
+    }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
