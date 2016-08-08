@@ -13,6 +13,9 @@ import SVPullToRefresh
     optional func getFavorites(profileCell: ProfileCell, getFavorites tweetID: String)
     
     optional func postRetweet(profileCell: ProfileCell, postTweets tweetID: String)
+
+    optional func replyToTweet(profileCell: ProfileCell, replyTweet tweetID: String)
+    
 }
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableCellButtonsDelegate{
@@ -25,6 +28,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tweetCountLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     
+    var delegate: ComposeViewControllerDelegate?
     var tweets : [Tweet]?
     var tweet : Tweet?
      
@@ -54,9 +58,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func postRetweet(profileCell: ProfileCell, postTweets tweetID: String) {
         TwitterClient.sharedInstance.reTweet(tweetID, success: { 
             self.tableView.triggerPullToRefresh()
+//            self.tableView.reloadData()
         }) { (error: NSError) in
                 TwitterClient.sharedInstance.unRetweet(tweetID, success: { 
                     self.tableView.triggerPullToRefresh()
+//                    self.tableView.reloadData()
                     }, failure: { (erro: NSError) in
                 })
         }
@@ -80,8 +86,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let count = self.tweets?.count
             self.getTimeLineTweets("\(count)", userID: self.userScreenName)
             self.tableView.reloadData()
-            self.tableView.pullToRefreshView.stopAnimating()
             self.tableView.layoutIfNeeded()
+
+            self.tableView.pullToRefreshView.stopAnimating()
             
         }
         
@@ -122,7 +129,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -138,19 +144,4 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     
-//    @IBAction func onBackTap(sender: AnyObject) {
-//        print("on back tap")
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

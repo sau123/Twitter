@@ -21,6 +21,10 @@ The following user stories are completed:
 * [x] Optional: User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 
 
+Second Part
+
+Work on pull to refresh.
+
 ##Video Walkthrough
 ![](./Twitter.gif)
 

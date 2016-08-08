@@ -81,7 +81,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }, failure: { (error: NSError) in
             })
         })
-        
     }
     
     //implementation of replyDelegate buttonsdelegate
