@@ -9,8 +9,13 @@
 import UIKit
 import SVPullToRefresh
 
+@objc protocol TableCellButtonsDelegate: class{
+    optional func getFavorites(profileCell: ProfileCell, getFavorites tweetID: String)
+    
+    optional func postRetweet(profileCell: ProfileCell, postTweets tweetID: String)
+}
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableCellButtonsDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var screenNameLabel: UILabel!
@@ -24,9 +29,41 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var tweet : Tweet?
      
     var userScreenName : String?
-
-    // if userid is nil, implies loggedIn user, else image tapped in tweetsVC
     
+    //implementation of favorites delegate
+    func getFavorites(profileCell: ProfileCell, getFavorites tweetID: String){
+        print("in profile view controller, got details from profilecell to profile VC")
+        TwitterClient.sharedInstance.favoriteTweet(tweetID, success: {
+            self.tableView.triggerPullToRefresh()
+//            self.tableView.reloadData()
+
+            //reload mayb!
+        }) { (error: NSError) in
+            print("Error in getFavorites implementation : \(error.code)")
+            
+            //make a network call to defavorite
+            TwitterClient.sharedInstance.deFavoriteTweet(tweetID, success: {
+                self.tableView.triggerPullToRefresh()
+//                self.tableView.reloadData()
+                }, failure: { (error: NSError) in
+            })
+        }
+    }
+    
+    //implementation of retweet delegate
+    func postRetweet(profileCell: ProfileCell, postTweets tweetID: String) {
+        TwitterClient.sharedInstance.reTweet(tweetID, success: { 
+            self.tableView.triggerPullToRefresh()
+        }) { (error: NSError) in
+                TwitterClient.sharedInstance.unRetweet(tweetID, success: { 
+                    self.tableView.triggerPullToRefresh()
+                    }, failure: { (erro: NSError) in
+                })
+        }
+    }
+    
+    
+    // if userid is nil, implies loggedIn user, else image tapped in tweetsVC
     func getTimeLineTweets(count: String?, userID: String?){
         TwitterClient.sharedInstance.userTimeline(count, userId: userID,success: { (tweets: [Tweet]) -> () in
             print("refreshing")
@@ -42,6 +79,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             print("pulled!")
             let count = self.tweets?.count
             self.getTimeLineTweets("\(count)", userID: self.userScreenName)
+            self.tableView.reloadData()
+            self.tableView.pullToRefreshView.stopAnimating()
+            self.tableView.layoutIfNeeded()
+            
         }
         
         self.tableView.addInfiniteScrollingWithActionHandler {
@@ -55,6 +96,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func setView(){
+        profileImageView.setImageWithURL((tweet?.imageUrl!)!)
         screenNameLabel.text = tweet!.screenName as? String
         fullNameLabel.text = tweet!.name as? String
         followersCountLabel.text = "\(tweet!.followersCount!)"
@@ -91,6 +133,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let cell = tableView.dequeueReusableCellWithIdentifier("ProfileCell", forIndexPath: indexPath) as! ProfileCell
         cell.tweet = tweets![indexPath.row]
+        cell.delegate = self
         return cell
     }
 

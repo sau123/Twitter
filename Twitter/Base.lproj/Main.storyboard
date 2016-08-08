@@ -512,7 +512,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icz-w6-I3H" userLabel="Content View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="hOt-dP-enq" appends="YES" id="pg6-qF-YFG"/>
@@ -569,7 +569,6 @@
         <!--Profile-->
         <scene sceneID="rrK-zG-gYA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Bz-Jv-vwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ProfileViewController" id="Tmb-8a-d2R" customClass="ProfileViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xnf-ld-S9Z"/>
@@ -685,6 +684,9 @@
                                                         <constraint firstAttribute="width" constant="20" id="kCX-qt-Ghu"/>
                                                     </constraints>
                                                     <state key="normal" image="favorites"/>
+                                                    <connections>
+                                                        <action selector="favoritesButtonTapped:" destination="vus-RF-zjv" eventType="touchUpInside" id="Pgf-SP-xxY"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="CricketWallah" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3r-xw-xfx">
                                                     <rect key="frame" x="67" y="0.0" width="88" height="16"/>
@@ -733,6 +735,9 @@
                                                         <constraint firstAttribute="height" constant="20" id="opt-5f-lfl"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="retweet"/>
+                                                    <connections>
+                                                        <action selector="reTweetButtonTapped:" destination="vus-RF-zjv" eventType="touchUpInside" id="hnn-12-Jco"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -788,6 +793,7 @@
                         <outlet property="tweetCountLabel" destination="1aH-UQ-Hpf" id="44e-9P-bna"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Bz-Jv-vwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="2XA-DU-uFq">
                     <connections>
                         <action selector="onImageTap:" destination="Tmb-8a-d2R" id="OWs-G5-mx1"/>

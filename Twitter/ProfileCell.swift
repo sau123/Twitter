@@ -21,10 +21,8 @@ class ProfileCell: UITableViewCell {
     
     var tweetID : String?
     var userScreenNameWhoPosted: String?
-//    weak var delegate: ButtonsDelegate? //replydelegate
-//    weak var favoritesDelegate: FavoritesDelegate?
-//    weak var retweetDelegate: RetweetDelegtate?
-//    
+    weak var delegate: TableCellButtonsDelegate? //allbuttonsdelegate
+
     var tweet : Tweet! {
         didSet{
             if tweet.favorited == 0{
@@ -43,7 +41,6 @@ class ProfileCell: UITableViewCell {
             
             userScreenNameWhoPosted = tweet.userScreenNameWhoPosted as? String
             tweetID = tweet.tweetID as? String
-//            dateLabel.text = tweet.duration
         }
     }
     override func awakeFromNib() {
@@ -63,6 +60,16 @@ class ProfileCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         tweetTextLabel.preferredMaxLayoutWidth = tweetTextLabel.frame.size.width
+    }
+    
+    @IBAction func favoritesButtonTapped(sender: AnyObject){
+        print("tapped favoritesButtonProfileCell")
+        delegate?.getFavorites!(self, getFavorites: tweetID!)
+    }
+    
+    @IBAction func reTweetButtonTapped(sender: AnyObject){
+        print("retweet button tappedProfileCell")
+        delegate?.postRetweet!(self, postTweets: tweetID!)
     }
     
 
