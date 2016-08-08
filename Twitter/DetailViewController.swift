@@ -20,11 +20,7 @@ class DetailViewController: UIViewController {
 
     
     var tweet : Tweet!
-//            if tweet.favorited == 0{
-//                favoritesImage.alpha = 0.5
-//            }else{
-//                favoritesImage.alpha = 1
-//            }
+    
 //            print(tweet.name)
     
 //            userScreenNameWhoPosted = tweet.userScreenNameWhoPosted as? String
@@ -33,14 +29,20 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         detailedNameLabel.text = tweet.name as? String
         tweetLabel.text = tweet.text as? String
         favoritesLabel.text = "\(tweet.favoritesCount)"
         reTweetLabel.text = "\(tweet.retweetCount)"
-        dateLabel.text = "\(tweet.duration)"
+        dateLabel.text = "\(tweet.duration!)"
         screenNameLabel.text = tweet.screenName as? String
         detailedImageLabel.setImageWithURL(tweet.imageUrl!)
-        
+//        
+//        if tweet.favorited == 0{
+//            favoritesImage.alpha = 0.5
+//        }else{
+//            favoritesImage.alpha = 1
+//        }
     }
 
     override func didReceiveMemoryWarning() {
