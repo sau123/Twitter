@@ -9,11 +9,6 @@
 import UIKit
 import SVPullToRefresh
 
-
-/*
-Delegates
- */
-
 // this is basically reply delegate
 @objc protocol ButtonsDelegate: class{ // reply
     optional func getTweetDetails(tweetCell: TweetCell, tweetDetails tweetID: String, userScreenNameWhoPosted: String)
