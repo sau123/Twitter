@@ -123,6 +123,9 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         refreshControlInit()
         self.getTimeLineTweets("\(6)") // for now, intially table will have 6 cells
     }
@@ -131,6 +134,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("count is saumeel: ",self.tweets?.count)
         return self.tweets?.count ?? 0
     }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
@@ -159,7 +163,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         performSegueWithIdentifier("profileSegue", sender: sender)
         
     }
-    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

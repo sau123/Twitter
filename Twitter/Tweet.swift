@@ -36,7 +36,6 @@ class Tweet: NSObject {
         name = dictionary["user"]!["name"] as? String
         favorited = dictionary["favorited"] as? Int
         
-//        user = (dictionary["user"]! as! User)
         user = User(dictionary: dictionary["user"] as! NSDictionary)
         
         userScreenNameWhoPosted = dictionary["user"]!["screen_name"] as? String
