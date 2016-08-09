@@ -24,7 +24,7 @@ The following user stories are completed:
 ##Video Walkthrough
 ![](./Twitter.gif)
 
-Second Part
+##Second Part
 
 The following user stories must be completed:
 
