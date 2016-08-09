@@ -25,6 +25,7 @@ class Tweet: NSObject {
     var followersCount: Int? = 0
     var followingCount: Int? = 0
     var tweetsCount: Int? = 0
+    var user: User?
     
     
     init(dictionary: NSDictionary){
@@ -34,6 +35,9 @@ class Tweet: NSObject {
         screenName = dictionary["user"]!["screen_name"] as? String
         name = dictionary["user"]!["name"] as? String
         favorited = dictionary["favorited"] as? Int
+        
+//        user = (dictionary["user"]! as! User)
+        user = User(dictionary: dictionary["user"] as! NSDictionary)
         
         userScreenNameWhoPosted = dictionary["user"]!["screen_name"] as? String
         tweetID = dictionary["id_str"] as? String

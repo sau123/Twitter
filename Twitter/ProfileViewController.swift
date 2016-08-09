@@ -29,9 +29,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var profileImageView: UIImageView!
     
     var delegate: ComposeViewControllerDelegate?
-    var tweets : [Tweet]?
+    var tweets : [Tweet]? = []
     var tweet : Tweet?
-     
+    var user : User?
+    
     var userScreenName : String?
     
     //implementation of favorites delegate
@@ -71,10 +72,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // if userid is nil, implies loggedIn user, else image tapped in tweetsVC
     func getTimeLineTweets(count: String?, userID: String?){
-        TwitterClient.sharedInstance.userTimeline(count, userId: userID,success: { (tweets: [Tweet]) -> () in
+        if userID == nil{
+            userScreenName = (User.currentUser?.screenname as! String)
+            
+        }
+        TwitterClient.sharedInstance.userTimeline(count, userId: userScreenName!,success: { (tweets: [Tweet]) -> () in
             print("refreshing")
             self.tweets = tweets
+            self.setView()
             self.tableView.reloadData()
+            
         }) { (error: NSError) -> () in
             print("error : \(error.localizedDescription)")
         }
@@ -103,12 +110,20 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func setView(){
-        profileImageView.setImageWithURL((tweet?.imageUrl!)!)
-        screenNameLabel.text = tweet!.screenName as? String
-        fullNameLabel.text = tweet!.name as? String
-        followersCountLabel.text = "\(tweet!.followersCount!)"
-        followingCountLabel.text = "\(tweet!.followingCount!)"
-        tweetCountLabel.text = "\(tweet!.tweetsCount!)"
+        
+//        profileImageView.setImageWithURL((tweet?.imageUrl!)!)
+//        screenNameLabel.text = tweet!.screenName as? String
+//        fullNameLabel.text = tweet!.name as? String
+//        followersCountLabel.text = "\(tweet!.followersCount!)"
+//        followingCountLabel.text = "\(tweet!.followingCount!)"
+//        tweetCountLabel.text = "\(tweet!.tweetsCount!)"
+        
+        profileImageView.setImageWithURL((user?.profileUrl!)!)
+        screenNameLabel.text = user?.screenname as? String
+        fullNameLabel.text = user?.name as? String
+        followersCountLabel.text = "\(user!.followersCount!)"
+        followingCountLabel.text = "\(user!.followingCount!)"
+        tweetCountLabel.text = "\(user!.tweetsCount!)"
     }
     
     override func viewDidLoad() {
@@ -118,7 +133,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         print(userScreenName)
         print("printed user id")
         
-        setView()
+        if userScreenName == nil {
+            user = User.currentUser
+        }
         
         tableView.delegate = self
         tableView.dataSource = self

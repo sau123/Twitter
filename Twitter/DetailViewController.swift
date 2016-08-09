@@ -21,11 +21,6 @@ class DetailViewController: UIViewController {
     
     var tweet : Tweet!
     
-//            print(tweet.name)
-    
-//            userScreenNameWhoPosted = tweet.userScreenNameWhoPosted as? String
-//            tweetID = tweet.tweetID as? String
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

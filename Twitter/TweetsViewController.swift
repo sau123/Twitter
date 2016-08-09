@@ -36,6 +36,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var _userScreenName : String? = nil
     var _userid : String? = nil
     var _tweet : Tweet? = nil
+    var _user : User? = nil
     
     //implemenation of composed delegate
     func composeTweet(tweet: Tweet) {
@@ -151,11 +152,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("tapped : ",sender.view!.tag)
         let tag = sender.view!.tag
         
-        
         self._tweet = self.tweets![tag]
         print("user id : ",self._tweet?.screenName)
         _userScreenName = self._tweet!.screenName! as String
-        
+        self._user = self.tweets![tag].user
         performSegueWithIdentifier("profileSegue", sender: sender)
         
     }
@@ -204,6 +204,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }else if segue.identifier == "profileSegue" {
             let profileViewController = segue.destinationViewController as! ProfileViewController
             profileViewController.tweet = self._tweet
+            profileViewController.user = self._user
             profileViewController.userScreenName = _userScreenName
         }
     
