@@ -51,7 +51,7 @@ The following user stories must be completed:
     * [ ] Optional: Swipe to delete an account (med)
 
 ##Video Walkthrough
-![](./Twitter1.gif)
+![](./Twitter2.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
