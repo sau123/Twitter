@@ -18,7 +18,7 @@ import SVPullToRefresh
     
 }
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableCellButtonsDelegate{
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableCellButtonsDelegate, UIScrollViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var screenNameLabel: UILabel!
@@ -33,7 +33,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var tweet : Tweet?
     var user : User?
     
+    @IBOutlet weak var headerView: UIView!
+    
     var userScreenName : String?
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        print("scrolled.")
+    }
+    
     
     //implementation of favorites delegate
     func getFavorites(profileCell: ProfileCell, getFavorites tweetID: String){
@@ -110,14 +117,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func setView(){
-        
-//        profileImageView.setImageWithURL((tweet?.imageUrl!)!)
-//        screenNameLabel.text = tweet!.screenName as? String
-//        fullNameLabel.text = tweet!.name as? String
-//        followersCountLabel.text = "\(tweet!.followersCount!)"
-//        followingCountLabel.text = "\(tweet!.followingCount!)"
-//        tweetCountLabel.text = "\(tweet!.tweetsCount!)"
-        
         profileImageView.setImageWithURL((user?.profileUrl!)!)
         screenNameLabel.text = user?.screenname as? String
         fullNameLabel.text = user?.name as? String
@@ -128,6 +127,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var scrollView = UIScrollView(frame: headerView.bounds)
+        scrollView.delegate = self
+        headerView.addSubview(scrollView)
+        
         
         print("viewDidLoad, ProfileViewController")
         print(userScreenName)
